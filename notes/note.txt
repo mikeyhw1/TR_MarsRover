@@ -34,3 +34,11 @@ npx ts-jest config:init
     "extends": "./tsconfig.json",
     "exclude": ["src/**/*.spec.ts", "src/**/*.test.ts"]
 }
+
+-> install nodemon
+
+"scripts": {
+        "start": "nodemon src/index.ts",
+        "test": "jest",
+        "build": "tsc  --project tsconfig.build.json"
+},
