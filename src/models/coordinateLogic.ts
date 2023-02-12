@@ -7,7 +7,7 @@ import {
     RoverAction,
     RoverCoordinate,
     MovingCoordinate,
-} from "./models.types";
+} from "../types/models.types";
 
 export const convertDirectionToDegree = (direction: Direction): CompassDegree => {
     switch (direction) {
@@ -41,7 +41,6 @@ export const convertDegreeToDirection = (compassDegree: CompassDegree): Directio
     }
 };
 
-// WIP: TOCHECK:
 export const degreeRoundUp = (degree: number): CompassDegree => {
     if (degree >= 360) {
         return degreeRoundUp(degree - 360);
@@ -52,22 +51,4 @@ export const degreeRoundUp = (degree: number): CompassDegree => {
     }
 };
 
-// WIP: TOFIX:
-export const roverAction_LRM = (input: MovingCoordinate, roverAction: RoverAction): movingDegree => {
-    let tempDegree: CompassDegree;
-    // const tempDegree = input.degree - 90;
-    // const tempDegree = input.degree + 90;
-    return {
-        ...input,
-        degree: degreeRoundUp(tempDegree),
-    };
-};
-
-// export const roverAction_R = (input: movingDegree): movingDegree => {
-//     return {
-//         ...input,
-//         degree: degreeRoundUp(tempDegree),
-//     };
-// };
-
-// TODO: roverCoordinate <- -> movingDegree
+// TODO: RoverCoordinate <- -> movingCoordinate
