@@ -1,12 +1,12 @@
-export const directions = ["N", "E", "S", "W"] as const;
-export type Direction = typeof directions[number];
+export const DIRECTIONS = ["N", "E", "S", "W"] as const;
+export type Direction = typeof DIRECTIONS[number];
 
 // 0 & 360 degree = north
-export const compassDegrees = [0, 90, 180, 270] as const;
-export type CompassDegree = typeof compassDegrees[number];
+export const COMPASS_DEGREES = [0, 90, 180, 270] as const;
+export type CompassDegree = typeof COMPASS_DEGREES[number];
 
-export const roverActions = ["L", "R", "M"] as const;
-export type RoverAction = typeof roverActions[number];
+export const ROVER_ACTIONS = ["L", "R", "M"] as const;
+export type RoverAction = typeof ROVER_ACTIONS[number];
 
 export type RoverCoordinate = {
     x: number;

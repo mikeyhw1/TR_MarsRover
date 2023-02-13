@@ -1,9 +1,9 @@
 import {
-    directions,
+    DIRECTIONS,
     Direction,
-    compassDegrees,
+    COMPASS_DEGREES,
     CompassDegree,
-    roverActions,
+    ROVER_ACTIONS,
     RoverAction,
     RoverCoordinate,
     MovingCoordinate,

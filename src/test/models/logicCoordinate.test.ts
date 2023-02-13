@@ -1,4 +1,10 @@
-import { convertDirectionToDegree, convertDegreeToDirection, degreeRoundUp } from "../../models/coordinateLogic";
+import {
+    convertDirectionToDegree,
+    convertDegreeToDirection,
+    degreeRoundUp,
+    roverCoordinateToMovingCoordinate,
+    movingCoordinateToRoverCoordinate,
+} from "../../models/coordinateLogic";
 
 describe("test <convertDirectionToDegree>", () => {
     test("convertDirectionToDegree", () => {
@@ -47,3 +53,9 @@ describe("test <degreeRoundUp>", () => {
     });
 });
 
+// describe("test <roverCoordinateToMovingCoordinate>", () => {
+//     test("roverCoordinateToMovingCoordinate", () => {
+//         // WIP:
+//         expect(roverCoordinateToMovingCoordinate({ x: 2, y: 3, direction: "N" })).toEqual({ x: 2, y: 3, degree: 0 });
+//     });
+// });

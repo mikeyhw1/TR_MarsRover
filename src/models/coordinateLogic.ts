@@ -1,9 +1,9 @@
 import {
-    directions,
+    DIRECTIONS,
     Direction,
-    compassDegrees,
+    COMPASS_DEGREES,
     CompassDegree,
-    roverActions,
+    ROVER_ACTIONS,
     RoverAction,
     RoverCoordinate,
     MovingCoordinate,
@@ -51,4 +51,20 @@ export const degreeRoundUp = (degree: number): CompassDegree => {
     }
 };
 
-// TODO: RoverCoordinate <- -> movingCoordinate
+export const roverCoordinateToMovingCoordinate = (roverCoordinate: RoverCoordinate): MovingCoordinate => {
+    const { x, y, direction } = roverCoordinate;
+    return {
+        x,
+        y,
+        degree: convertDirectionToDegree(direction),
+    };
+};
+
+export const movingCoordinateToRoverCoordinate = (movingCoordinate: MovingCoordinate): RoverCoordinate => {
+    const { x, y, degree } = movingCoordinate;
+    return {
+        x,
+        y,
+        direction: convertDegreeToDirection(degree),
+    };
+};
