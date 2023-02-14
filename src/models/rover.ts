@@ -9,9 +9,9 @@ import {
     MovingCoordinate,
 } from "../types/models.types";
 import { degreeRoundUp, roverCoordinateToMovingCoordinate, movingCoordinateToRoverCoordinate } from "./coordinateLogic";
-import { parseRowInput } from "../parser/parser";
+import { parseInstructionInput } from "../parser/parser";
 
-function roverAction_LRM(movingCoordinate: MovingCoordinate, roverAction: RoverAction): MovingCoordinate {
+export function roverAction_LRM(movingCoordinate: MovingCoordinate, roverAction: RoverAction): MovingCoordinate {
     const inputDegree: CompassDegree = movingCoordinate.degree;
 
     switch (roverAction) {
@@ -58,9 +58,10 @@ function roverAction_LRM(movingCoordinate: MovingCoordinate, roverAction: RoverA
     }
 }
 
-export function handleRoverInput(initCoordinate: RoverCoordinate, rowInput: string) {
+// TOTEST:
+export function handleRoverInput(initCoordinate: RoverCoordinate, instructionInput: string) {
     // TODO2: max field size
-    const inputArray: RoverAction[] | undefined = parseRowInput(rowInput);
+    const inputArray: RoverAction[] | undefined = parseInstructionInput(instructionInput);
     if (inputArray === undefined) {
         console.log(`invalid rowInput!`);
         // TODO2:

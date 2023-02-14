@@ -9,7 +9,7 @@ import {
     MovingCoordinate,
 } from "../types/models.types";
 
-function convertDirectionToDegree(direction: Direction): CompassDegree {
+export function convertDirectionToDegree(direction: Direction): CompassDegree {
     switch (direction) {
         case "N":
             return 0;
@@ -25,7 +25,7 @@ function convertDirectionToDegree(direction: Direction): CompassDegree {
     }
 }
 
-function convertDegreeToDirection(compassDegree: CompassDegree): Direction {
+export function convertDegreeToDirection(compassDegree: CompassDegree): Direction {
     switch (compassDegree) {
         case 0:
             return "N";
