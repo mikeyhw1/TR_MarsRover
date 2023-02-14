@@ -9,17 +9,14 @@ import {
     MovingCoordinate,
 } from "./models.types";
 
-// TOTEST:
 export function isRoverAction(input: any): input is RoverAction {
     return input === "L" || input === "R" || input === "M";
 }
 
-// TOTEST:
 export function isDirection(input: any): input is Direction {
     return input === "N" || input === "E" || input === "S" || input === "W";
 }
 
-// TOTEST:
 export function isRoverCoordinate(input: any): input is RoverCoordinate {
     return (
         typeof input.x === "number" &&
@@ -28,6 +25,4 @@ export function isRoverCoordinate(input: any): input is RoverCoordinate {
         input.y >= 0 &&
         isDirection(input.direction)
     );
-
-    // (input.direction === "N" || input.direction === "E" || input.direction === "S" || input.direction === "W")
 }
