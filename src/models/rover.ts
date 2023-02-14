@@ -8,9 +8,10 @@ import {
     RoverCoordinate,
     MovingCoordinate,
 } from "../types/models.types";
-import { degreeRoundUp } from "./coordinateLogic";
+import { degreeRoundUp, roverCoordinateToMovingCoordinate, movingCoordinateToRoverCoordinate } from "./coordinateLogic";
+import { parseRowInput } from "../parser/parser";
 
-export function roverAction_LRM(movingCoordinate: MovingCoordinate, roverAction: RoverAction): MovingCoordinate {
+function roverAction_LRM(movingCoordinate: MovingCoordinate, roverAction: RoverAction): MovingCoordinate {
     const inputDegree: CompassDegree = movingCoordinate.degree;
 
     switch (roverAction) {
@@ -57,6 +58,25 @@ export function roverAction_LRM(movingCoordinate: MovingCoordinate, roverAction:
     }
 }
 
-export function handleRoverInput(rowInput: string) {
-    // const inputArray = rowInput.split("");
+export function handleRoverInput(initCoordinate: RoverCoordinate, rowInput: string) {
+    // TODO2: max field size
+    const inputArray: RoverAction[] | undefined = parseRowInput(rowInput);
+    if (inputArray === undefined) {
+        console.log(`invalid rowInput!`);
+        // TODO2:
+        return;
+    }
+
+    let movingCoordinate: MovingCoordinate = roverCoordinateToMovingCoordinate(initCoordinate);
+    // let tempCoordinate: MovingCoordinate;
+    inputArray.forEach((roverAction, index) => {
+        movingCoordinate = roverAction_LRM(movingCoordinate, roverAction);
+        console.log(`${index} round-result : ${movingCoordinate.x}, ${movingCoordinate.y},${movingCoordinate.degree},`);
+    });
+
+    const finalCoordinate: RoverCoordinate = movingCoordinateToRoverCoordinate(movingCoordinate);
+
+    console.log(`FINAL-result : ${finalCoordinate.x}, ${finalCoordinate.y},${finalCoordinate.direction},`);
 }
+
+// TODO: row coord input -> RoverCoordinate
