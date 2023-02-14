@@ -30,6 +30,7 @@ export const roverAction_LRM = (movingCoordinate: MovingCoordinate, roverAction:
             };
         case "M":
             // TODO2: allow outbround moving VS stop the rover
+            // TODO2: create seperate function
             switch (inputDegree) {
                 case 0:
                     return {
@@ -57,4 +58,8 @@ export const roverAction_LRM = (movingCoordinate: MovingCoordinate, roverAction:
         // default:
         //     break;
     }
+};
+
+export const handleRoverInput = (rowInput: string) => {
+    // const inputArray = rowInput.split("");
 };

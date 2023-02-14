@@ -1,13 +1,3 @@
-// import {
-//     directions,
-//     Direction,
-//     compassDegrees,
-//     CompassDegree,
-//     roverActions,
-//     RoverAction,
-//     RoverCoordinate,
-//     MovingCoordinate,
-// } from "../../types/models.types";
 import { roverAction_LRM } from "../../models/rover";
 
 describe("test <roverAction_LRM>", () => {

@@ -53,9 +53,20 @@ describe("test <degreeRoundUp>", () => {
     });
 });
 
-// describe("test <roverCoordinateToMovingCoordinate>", () => {
-//     test("roverCoordinateToMovingCoordinate", () => {
-//         // WIP:
-//         expect(roverCoordinateToMovingCoordinate({ x: 2, y: 3, direction: "N" })).toEqual({ x: 2, y: 3, degree: 0 });
-//     });
-// });
+describe("test <roverCoordinateToMovingCoordinate>", () => {
+    test("roverCoordinateToMovingCoordinate", () => {
+        expect(roverCoordinateToMovingCoordinate({ x: 2, y: 3, direction: "N" })).toEqual({ x: 2, y: 3, degree: 0 });
+        expect(roverCoordinateToMovingCoordinate({ x: 2, y: 3, direction: "E" })).toEqual({ x: 2, y: 3, degree: 90 });
+        expect(roverCoordinateToMovingCoordinate({ x: 2, y: 3, direction: "S" })).toEqual({ x: 2, y: 3, degree: 180 });
+        expect(roverCoordinateToMovingCoordinate({ x: 2, y: 3, direction: "W" })).toEqual({ x: 2, y: 3, degree: 270 });
+    });
+});
+
+describe("test <movingCoordinateToRoverCoordinate>", () => {
+    test("movingCoordinateToRoverCoordinate", () => {
+        expect(movingCoordinateToRoverCoordinate({ x: 2, y: 3, degree: 0 })).toEqual({ x: 2, y: 3, direction: "N" });
+        expect(movingCoordinateToRoverCoordinate({ x: 2, y: 3, degree: 90 })).toEqual({ x: 2, y: 3, direction: "E" });
+        expect(movingCoordinateToRoverCoordinate({ x: 2, y: 3, degree: 180 })).toEqual({ x: 2, y: 3, direction: "S" });
+        expect(movingCoordinateToRoverCoordinate({ x: 2, y: 3, degree: 270 })).toEqual({ x: 2, y: 3, direction: "W" });
+    });
+});

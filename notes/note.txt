@@ -42,3 +42,34 @@ npx ts-jest config:init
         "test": "jest",
         "build": "tsc  --project tsconfig.build.json"
 },
+
+
+
+
+
+
+
+
+//////////////
+/// adv TS ///
+//////////////
+
+~1~
+if ('swim' in creature){
+    creature.swim()
+}
+
+~2~
+function isABC(input: string) : input is ABC {
+    return input === 'A' || input === 'B' || input === 'C';
+}
+
+~2.5~
+function compare(a: string, b: string) : -1 | 0 | 1 {
+    return a === b ? 0 : (a>b) ? 1 : -1;
+}
+
+~3~
+type SomeType = Pick<User, 'id' | 'roles'>;
+// Omit<User, 'id'>
+// Partial<User> & {id:number}  // all ?, id must exist
