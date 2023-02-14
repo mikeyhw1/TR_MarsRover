@@ -11,18 +11,18 @@ import {
 
 // TODO2: usage of validator move to following input from UI
 // validate
-export const parseRowInput = (rowInput: string) => {
+export function parseRowInput(rowInput: string) {
     const rowInputArray = rowInput.split("");
-    let valid = false;
+    // let valid = false;
 
     // TODO:
 
-    // rowInputArray.forEach((i: RoverAction | any) => {
-    //     if (validateRowInputItem(i)) {
-    //     } else {
-    //     }
-    // });
-};
+    rowInputArray.forEach((i: RoverAction | any) => {
+        // if (validateRowInputItem(i)) {
+        // } else {
+        // }
+    });
+}
 
 // TODO: rebuild
 // const validateRowInputItem = (rowInputItem: RoverAction | any): RoverAction | undefined => {
@@ -41,3 +41,7 @@ export const parseRowInput = (rowInput: string) => {
 //             return undefined;
 //     }
 // };
+
+function isRoverAction(input: any): input is RoverAction {
+    return input === "L" || input === "R" || input === "M";
+}

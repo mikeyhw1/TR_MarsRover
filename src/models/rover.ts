@@ -10,10 +10,7 @@ import {
 } from "../types/models.types";
 import { degreeRoundUp } from "./coordinateLogic";
 
-// WIP: TOTEST:
-export const roverAction_LRM = (movingCoordinate: MovingCoordinate, roverAction: RoverAction): MovingCoordinate => {
-    // const tempDegree = input.degree - 90;
-    // const tempDegree = input.degree + 90;
+export function roverAction_LRM(movingCoordinate: MovingCoordinate, roverAction: RoverAction): MovingCoordinate {
     const inputDegree: CompassDegree = movingCoordinate.degree;
 
     switch (roverAction) {
@@ -58,8 +55,8 @@ export const roverAction_LRM = (movingCoordinate: MovingCoordinate, roverAction:
         // default:
         //     break;
     }
-};
+}
 
-export const handleRoverInput = (rowInput: string) => {
+export function handleRoverInput(rowInput: string) {
     // const inputArray = rowInput.split("");
-};
+}

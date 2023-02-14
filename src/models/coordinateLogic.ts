@@ -9,7 +9,7 @@ import {
     MovingCoordinate,
 } from "../types/models.types";
 
-export const convertDirectionToDegree = (direction: Direction): CompassDegree => {
+export function convertDirectionToDegree(direction: Direction): CompassDegree {
     switch (direction) {
         case "N":
             return 0;
@@ -23,9 +23,9 @@ export const convertDirectionToDegree = (direction: Direction): CompassDegree =>
         //     console.error("ERROR : <convertDirectionToDegree> unexpected Direction input");
         //     break;
     }
-};
+}
 
-export const convertDegreeToDirection = (compassDegree: CompassDegree): Direction => {
+export function convertDegreeToDirection(compassDegree: CompassDegree): Direction {
     switch (compassDegree) {
         case 0:
             return "N";
@@ -39,9 +39,9 @@ export const convertDegreeToDirection = (compassDegree: CompassDegree): Directio
         //     console.error("ERROR : <convertDirectionToDegree> unexpected Direction input");
         //     break;
     }
-};
+}
 
-export const degreeRoundUp = (degree: number): CompassDegree => {
+export function degreeRoundUp(degree: number): CompassDegree {
     if (degree >= 360) {
         return degreeRoundUp(degree - 360);
     } else if (degree < 0) {
@@ -49,22 +49,22 @@ export const degreeRoundUp = (degree: number): CompassDegree => {
     } else {
         return degree as CompassDegree;
     }
-};
+}
 
-export const roverCoordinateToMovingCoordinate = (roverCoordinate: RoverCoordinate): MovingCoordinate => {
+export function roverCoordinateToMovingCoordinate(roverCoordinate: RoverCoordinate): MovingCoordinate {
     const { x, y, direction } = roverCoordinate;
     return {
         x,
         y,
         degree: convertDirectionToDegree(direction),
     };
-};
+}
 
-export const movingCoordinateToRoverCoordinate = (movingCoordinate: MovingCoordinate): RoverCoordinate => {
+export function movingCoordinateToRoverCoordinate(movingCoordinate: MovingCoordinate): RoverCoordinate {
     const { x, y, degree } = movingCoordinate;
     return {
         x,
         y,
         direction: convertDegreeToDirection(degree),
     };
-};
+}
