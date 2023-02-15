@@ -35,8 +35,7 @@ export function roverAction_LRM(
             };
         case "M":
             // NOTE: only move if in bound
-            // TODO2: allow outbround moving VS stop the rover
-            // TODO2: create seperate function
+            // TODO2: create seperate function?
             switch (inputDegree) {
                 case 0:
                     if (isInBounds(minCoordinate.y, maxCoordinate.y, movingCoordinate.y, 1)) {
@@ -81,6 +80,9 @@ export function roverAction_LRM(
 export function handleRoverInput(maxCoordinate: Coordinate, initCoordinateInput: string, instructionInput: string) {
     // TODO2: check input by UI
 
+    // TODO:
+    // TOFIX: fix with adding UI
+    // TODO:
     const initCoordinate: RoverCoordinate | undefined = parseCoordinateInput(initCoordinateInput);
     if (initCoordinate === undefined) {
         console.log(`invalid initCoordinateInput!`);

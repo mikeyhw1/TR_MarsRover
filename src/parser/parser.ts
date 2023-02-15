@@ -5,10 +5,11 @@ import {
     CompassDegree,
     ROVER_ACTIONS,
     RoverAction,
+    Coordinate,
     RoverCoordinate,
     MovingCoordinate,
 } from "../types/models.types";
-import { isRoverAction, isRoverCoordinate } from "../types/validator";
+import { isCoordinate, isRoverAction, isRoverCoordinate } from "../types/validator";
 
 export function parseInstructionInput(instructionInput: string): RoverAction[] | undefined {
     // TODO2: UI input check??
@@ -48,4 +49,13 @@ export function parseCoordinateInput(coordinateInput: string): RoverCoordinate |
         direction: coordinateArray[2],
     };
     return isRoverCoordinate(tempRoverCoordinate) ? tempRoverCoordinate : undefined;
+}
+
+export function parseMaxCoordinateInput(maxCoordinateInput: string): Coordinate | undefined {
+    const coordinateArray = maxCoordinateInput.split(" ");
+    const tempCoordinate = {
+        x: parseInt(coordinateArray[0]),
+        y: parseInt(coordinateArray[1]),
+    };
+    return isCoordinate(tempCoordinate) ? tempCoordinate : undefined;
 }
