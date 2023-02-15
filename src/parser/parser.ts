@@ -33,7 +33,7 @@ export function parseInstructionInput(instructionInput: string): RoverAction[] |
             // console.log(`valid rowInput ${i}`);
             tempInputArray.push(i);
         } else {
-            console.log(`invalid rowInput ${i}`);
+            // console.log(`invalid rowInput ${i}`);
             valid = false;
         }
     });

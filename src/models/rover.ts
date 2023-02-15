@@ -9,7 +9,7 @@ import {
     MovingCoordinate,
 } from "../types/models.types";
 import { degreeRoundUp, roverCoordinateToMovingCoordinate, movingCoordinateToRoverCoordinate } from "./coordinateLogic";
-import { parseInstructionInput } from "../parser/parser";
+import { parseInstructionInput, parseCoordinateInput } from "../parser/parser";
 
 export function roverAction_LRM(movingCoordinate: MovingCoordinate, roverAction: RoverAction): MovingCoordinate {
     const inputDegree: CompassDegree = movingCoordinate.degree;
@@ -59,25 +59,29 @@ export function roverAction_LRM(movingCoordinate: MovingCoordinate, roverAction:
 }
 
 // TOTEST:
-export function handleRoverInput(initCoordinate: RoverCoordinate, instructionInput: string) {
+export function handleRoverInput(initCoordinateInput: string, instructionInput: string) {
     // TODO2: max field size
+
+    const initCoordinate: RoverCoordinate | undefined = parseCoordinateInput(initCoordinateInput);
+    if (initCoordinate === undefined) {
+        console.log(`invalid initCoordinateInput!`);
+        // TODO3: ui
+        return;
+    }
+
     const inputArray: RoverAction[] | undefined = parseInstructionInput(instructionInput);
     if (inputArray === undefined) {
-        console.log(`invalid rowInput!`);
+        console.log(`invalid instructionInput!`);
         // TODO3: ui
         return;
     }
 
     let movingCoordinate: MovingCoordinate = roverCoordinateToMovingCoordinate(initCoordinate);
-    // let tempCoordinate: MovingCoordinate;
     inputArray.forEach((roverAction, index) => {
         movingCoordinate = roverAction_LRM(movingCoordinate, roverAction);
-        console.log(`${index} round-result : ${movingCoordinate.x}, ${movingCoordinate.y},${movingCoordinate.degree},`);
+        // console.log(`${index} round-result : ${movingCoordinate.x}, ${movingCoordinate.y},${movingCoordinate.degree},`);
     });
-
     const finalCoordinate: RoverCoordinate = movingCoordinateToRoverCoordinate(movingCoordinate);
-
-    console.log(`FINAL-result : ${finalCoordinate.x}, ${finalCoordinate.y},${finalCoordinate.direction},`);
+    console.log(`FINAL-result : ${finalCoordinate.x}, ${finalCoordinate.y}, ${finalCoordinate.direction}`);
+    return `${finalCoordinate.x} ${finalCoordinate.y} ${finalCoordinate.direction}`;
 }
-
-// TODO: row coord input -> RoverCoordinate
