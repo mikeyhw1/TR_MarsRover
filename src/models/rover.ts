@@ -10,8 +10,8 @@ import {
     MovingCoordinate,
 } from "../types/models.types";
 import { degreeRoundUp, roverCoordinateToMovingCoordinate, movingCoordinateToRoverCoordinate } from "./coordinateLogic";
-import { parseInstructionInput, parseCoordinateInput } from "../parser/parser";
-import { isInBounds } from "../types/validator";
+import { parseInstructionInput, parseCoordinateInput, parseMaxCoordinateInput } from "../parser/parser";
+import { isInBounds, isCoordinate } from "../types/validator";
 import { minCoordinate } from "../config/config";
 
 export function roverAction_LRM(
@@ -77,24 +77,31 @@ export function roverAction_LRM(
     }
 }
 
-export function handleRoverInput(maxCoordinate: Coordinate, initCoordinateInput: string, instructionInput: string) {
-    // TODO2: check input by UI
+export function handleRoverInput(
+    input_maxCoordinate: string,
+    input_currentCoordinate: string,
+    input_instructions: string
+): string | undefined {
+    // TOCHECK: double check?
+    const maxCoordinate: Coordinate | undefined = parseMaxCoordinateInput(input_maxCoordinate);
+    if (maxCoordinate === undefined || !isCoordinate(maxCoordinate)) {
+        console.log(`invalid input_maxCoordinate!`);
 
-    // TODO:
-    // TOFIX: fix with adding UI
-    // TODO:
-    const initCoordinate: RoverCoordinate | undefined = parseCoordinateInput(initCoordinateInput);
-    if (initCoordinate === undefined) {
-        console.log(`invalid initCoordinateInput!`);
-        // TODO3: ui
-        return;
+        return undefined;
     }
 
-    const inputArray: RoverAction[] | undefined = parseInstructionInput(instructionInput);
+    const initCoordinate: RoverCoordinate | undefined = parseCoordinateInput(input_currentCoordinate);
+    if (initCoordinate === undefined) {
+        console.log(`invalid initCoordinateInput!`);
+
+        return undefined;
+    }
+
+    const inputArray: RoverAction[] | undefined = parseInstructionInput(input_instructions);
     if (inputArray === undefined) {
         console.log(`invalid instructionInput!`);
-        // TODO3: ui
-        return;
+
+        return undefined;
     }
 
     let movingCoordinate: MovingCoordinate = roverCoordinateToMovingCoordinate(initCoordinate);

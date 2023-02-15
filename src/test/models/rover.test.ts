@@ -29,19 +29,19 @@ describe("test <roverAction_LRM>", () => {
 
 describe("test <handleRoverInput>", () => {
     test("handleRoverInput", () => {
-        expect(handleRoverInput({ x: 5, y: 5 }, "1 2 N", "LMLMLMLMM")).toBe("1 3 N");
-        expect(handleRoverInput({ x: 5, y: 5 }, "3 3 E", "MMRMMRMRRM")).toBe("5 1 E");
-        expect(handleRoverInput({ x: 5, y: 5 }, "1 1 N", "MMM")).toBe("1 4 N");
-        expect(handleRoverInput({ x: 5, y: 5 }, "4 4 W", "MMM")).toBe("1 4 W");
-        expect(handleRoverInput({ x: 5, y: 5 }, "1 1 N", "LLL")).toBe("1 1 E");
-        expect(handleRoverInput({ x: 5, y: 5 }, "1 1 N", "RRR")).toBe("1 1 W");
-        expect(handleRoverInput({ x: 5, y: 5 }, "3 3 N", "RRMM")).toBe("3 1 S");
-        expect(handleRoverInput({ x: 6, y: 5 }, "3 3 S", "LMMM")).toBe("6 3 E");
+        expect(handleRoverInput("5 5", "1 2 N", "LMLMLMLMM")).toBe("1 3 N");
+        expect(handleRoverInput("5 5", "3 3 E", "MMRMMRMRRM")).toBe("5 1 E");
+        expect(handleRoverInput("5 5", "1 1 N", "MMM")).toBe("1 4 N");
+        expect(handleRoverInput("5 5", "4 4 W", "MMM")).toBe("1 4 W");
+        expect(handleRoverInput("5 5", "1 1 N", "LLL")).toBe("1 1 E");
+        expect(handleRoverInput("5 5", "1 1 N", "RRR")).toBe("1 1 W");
+        expect(handleRoverInput("5 5", "3 3 N", "RRMM")).toBe("3 1 S");
+        expect(handleRoverInput("6 5", "3 3 S", "LMMM")).toBe("6 3 E");
     });
     test("isInBounds", () => {
-        expect(handleRoverInput({ x: 5, y: 5 }, "1 2 N", "MMMMMMMMM")).toBe("1 5 N");
-        expect(handleRoverInput({ x: 5, y: 5 }, "1 2 N", "MMMMMMMMMRRMM")).toBe("1 3 S");
-        expect(handleRoverInput({ x: 5, y: 5 }, "2 2 W", "MMMMMMMMM")).toBe("0 2 W");
-        expect(handleRoverInput({ x: 5, y: 5 }, "2 2 W", "MMMMMMMMMRRMMM")).toBe("3 2 E");
+        expect(handleRoverInput("5 5", "1 2 N", "MMMMMMMMM")).toBe("1 5 N");
+        expect(handleRoverInput("5 5", "1 2 N", "MMMMMMMMMRRMM")).toBe("1 3 S");
+        expect(handleRoverInput("5 5", "2 2 W", "MMMMMMMMM")).toBe("0 2 W");
+        expect(handleRoverInput("5 5", "2 2 W", "MMMMMMMMMRRMMM")).toBe("3 2 E");
     });
 });

@@ -1,6 +1,7 @@
 import { print, clear, askQuestion } from "./consoleBuilder";
 import { minCoordinate } from "../config/config";
 import { isCoordinate } from "../types/validator";
+import { handleRoverInput } from "../models/rover";
 import { parseMaxCoordinateInput, parseCoordinateInput, parseInstructionInput } from "../parser/parser";
 import {
     DIRECTIONS,
@@ -16,11 +17,13 @@ import {
 
 let temp_maxCoordinate: string = "";
 let temp_currentCoordinate: string = "";
+let temp_instructions: string = "";
 
 export function systemStart() {
     clear(false);
     temp_maxCoordinate = "";
     temp_currentCoordinate = "";
+    temp_instructions = "";
 
     print("--------------------------");
     print("|    System Started !    |");
@@ -48,13 +51,13 @@ function enterMaxCoordinate(input_maxCoordinate: string) {
 
 function enterCurrentCoordinate() {
     clear(true);
-    temp_currentCoordinate = "";
     print(`MAX coorinate : ${temp_maxCoordinate}`);
 
-    askQuestion(`Press enter rover current coordinate & orientation! (e.g.: '1 2 N')`, processCurrentCoordinate);
+    temp_currentCoordinate = "";
+    askQuestion(`Press enter rover current coordinate & orientation! (e.g.: '1 2 N')`, validateCurrentCoordinate);
 }
 
-function processCurrentCoordinate(input_currentCoordinate: string) {
+function validateCurrentCoordinate(input_currentCoordinate: string) {
     const initCoordinate: RoverCoordinate | undefined = parseCoordinateInput(input_currentCoordinate);
     if (initCoordinate === undefined) {
         clear(true);
@@ -69,14 +72,35 @@ function enterInstructions() {
     clear(true);
     print(`Rover current coorinate : ${temp_currentCoordinate}`);
 
-    askQuestion(`Press enter rover moving instructions! (e.g.: 'LMLMLMLMM')`, processInstructions);
+    temp_instructions = "";
+    askQuestion(`Press enter rover moving instructions! (e.g.: 'LMLMLMLMM')`, validateInstructions);
 }
 
-function processInstructions(input_instructions: string) {
+function validateInstructions(input_instructions: string) {
     const inputArray: RoverAction[] | undefined = parseInstructionInput(input_instructions);
     if (inputArray === undefined) {
         clear(true);
         print(`INVALID rover moving instructions input : ${input_instructions}`);
         return askQuestion(`Press enter to retry!`, enterInstructions);
     }
+    temp_instructions = input_instructions;
+    processRoverInputs();
+}
+
+function processRoverInputs() {
+    const finalCoordinate: string | undefined = handleRoverInput(
+        temp_maxCoordinate,
+        temp_currentCoordinate,
+        temp_instructions
+    );
+    if (finalCoordinate === undefined) {
+        clear(true);
+        print(`ERROR processing input! please retry from the beginning:`);
+        return askQuestion(`Press enter to restart!`, systemStart);
+    }
+
+    print(`Final Coordinate:`);
+    print(`${finalCoordinate}`);
+    print("--------------------------");
+    return askQuestion(`Press enter to input new rover current coordinate & instructions!`, enterCurrentCoordinate);
 }
