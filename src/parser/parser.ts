@@ -8,7 +8,7 @@ import {
     RoverCoordinate,
     MovingCoordinate,
 } from "../types/models.types";
-import { isRoverAction } from "../types/validator";
+import { isRoverAction, isRoverCoordinate } from "../types/validator";
 
 export function parseInstructionInput(instructionInput: string): RoverAction[] | undefined {
     // TODO2: UI input check??
@@ -40,16 +40,12 @@ export function parseInstructionInput(instructionInput: string): RoverAction[] |
     return valid && tempInputArray.length > 0 ? tempInputArray : undefined;
 }
 
-// export function parseCoordinateInput(coordinateInput: string): RoverCoordinate | undefined {
-//     function isCoordinateInput(input: any): input is RoverCoordinate {
-//         return typeof input.x === "number" && typeof input.y === "number" &&
-//     }
-
-//     // function isPerson(o: any): o is Person {
-//     //     return typeof o.firstName === "string" && typeof o.lastName === "string";
-//     // }
-//     return {
-//         x: number;
-//         y:
-//     }
-// }
+export function parseCoordinateInput(coordinateInput: string): RoverCoordinate | undefined {
+    const coordinateArray = coordinateInput.split(" ");
+    const tempRoverCoordinate = {
+        x: parseInt(coordinateArray[0]),
+        y: parseInt(coordinateArray[1]),
+        direction: coordinateArray[2],
+    };
+    return isRoverCoordinate(tempRoverCoordinate) ? tempRoverCoordinate : undefined;
+}

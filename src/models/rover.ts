@@ -64,7 +64,7 @@ export function handleRoverInput(initCoordinate: RoverCoordinate, instructionInp
     const inputArray: RoverAction[] | undefined = parseInstructionInput(instructionInput);
     if (inputArray === undefined) {
         console.log(`invalid rowInput!`);
-        // TODO2:
+        // TODO3: ui
         return;
     }
 

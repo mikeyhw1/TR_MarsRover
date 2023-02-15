@@ -9,6 +9,7 @@ describe("test <isRoverAction>", () => {
         expect(isRoverAction(0)).toBe(false);
         expect(isRoverAction(null)).toBe(false);
         expect(isRoverAction(3)).toBe(false);
+        expect(isRoverAction(3)).toBe(false);
         expect(isRoverAction("W")).toBe(false);
         expect(isRoverAction("l")).toBe(false);
         expect(isRoverAction("r")).toBe(false);
