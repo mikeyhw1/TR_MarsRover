@@ -1,7 +1,7 @@
 export const DIRECTIONS = ["N", "E", "S", "W"] as const;
 export type Direction = typeof DIRECTIONS[number];
 
-// 0 & 360 degree = north
+// NOTES: 0 & 360 degree = north
 export const COMPASS_DEGREES = [0, 90, 180, 270] as const;
 export type CompassDegree = typeof COMPASS_DEGREES[number];
 
@@ -13,7 +13,7 @@ export type Coordinate = {
     y: number;
 };
 
-// FAIL NOTES: fail to use interfaces extends
+// FAIL NOTES: fail to use 'interfaces extends'
 export type RoverCoordinate = {
     x: number;
     y: number;

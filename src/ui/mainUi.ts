@@ -3,17 +3,7 @@ import { minCoordinate } from "../config/config";
 import { isCoordinate } from "../types/validator";
 import { handleRoverInput } from "../models/rover";
 import { parseMaxCoordinateInput, parseCoordinateInput, parseInstructionInput } from "../parser/parser";
-import {
-    DIRECTIONS,
-    Direction,
-    COMPASS_DEGREES,
-    CompassDegree,
-    ROVER_ACTIONS,
-    RoverAction,
-    Coordinate,
-    RoverCoordinate,
-    MovingCoordinate,
-} from "../types/models.types";
+import { RoverAction, Coordinate, RoverCoordinate } from "../types/models.types";
 
 let temp_maxCoordinate: string = "";
 let temp_currentCoordinate: string = "";
@@ -24,11 +14,9 @@ export function systemStart() {
     temp_maxCoordinate = "";
     temp_currentCoordinate = "";
     temp_instructions = "";
-
     print("--------------------------");
     print("|    System Started !    |");
     print("--------------------------");
-
     askQuestion(`Press enter to continuou!`, showBasicInfo);
 }
 
@@ -52,7 +40,6 @@ function enterMaxCoordinate(input_maxCoordinate: string) {
 function enterCurrentCoordinate() {
     clear(true);
     print(`MAX coorinate : ${temp_maxCoordinate}`);
-
     temp_currentCoordinate = "";
     askQuestion(`Press enter rover current coordinate & orientation! (e.g.: '1 2 N')`, validateCurrentCoordinate);
 }
@@ -71,7 +58,6 @@ function validateCurrentCoordinate(input_currentCoordinate: string) {
 function enterInstructions() {
     clear(true);
     print(`Rover current coorinate : ${temp_currentCoordinate}`);
-
     temp_instructions = "";
     askQuestion(`Press enter rover moving instructions! (e.g.: 'LMLMLMLMM')`, validateInstructions);
 }
@@ -98,10 +84,9 @@ function processRoverInputs() {
         print(`ERROR processing input! please retry from the beginning:`);
         return askQuestion(`Press enter to restart!`, systemStart);
     }
-
     clear(true);
     print(`Final Coordinate:`);
     print(`${finalCoordinate}`);
     print("--------------------------");
-    return askQuestion(`Press enter to start new input`, enterCurrentCoordinate);
+    return askQuestion(`Press enter to start new round`, enterCurrentCoordinate);
 }

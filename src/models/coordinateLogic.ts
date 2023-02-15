@@ -1,13 +1,4 @@
-import {
-    DIRECTIONS,
-    Direction,
-    COMPASS_DEGREES,
-    CompassDegree,
-    ROVER_ACTIONS,
-    RoverAction,
-    RoverCoordinate,
-    MovingCoordinate,
-} from "../types/models.types";
+import { Direction, CompassDegree, RoverCoordinate, MovingCoordinate } from "../types/models.types";
 
 export function convertDirectionToDegree(direction: Direction): CompassDegree {
     switch (direction) {
@@ -19,9 +10,6 @@ export function convertDirectionToDegree(direction: Direction): CompassDegree {
             return 180;
         case "W":
             return 270;
-        // default:
-        //     console.error("ERROR : <convertDirectionToDegree> unexpected Direction input");
-        //     break;
     }
 }
 
@@ -35,9 +23,6 @@ export function convertDegreeToDirection(compassDegree: CompassDegree): Directio
             return "S";
         case 270:
             return "W";
-        // default:
-        //     console.error("ERROR : <convertDirectionToDegree> unexpected Direction input");
-        //     break;
     }
 }
 

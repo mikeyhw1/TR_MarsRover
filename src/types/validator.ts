@@ -1,14 +1,4 @@
-import {
-    DIRECTIONS,
-    Direction,
-    COMPASS_DEGREES,
-    CompassDegree,
-    ROVER_ACTIONS,
-    RoverAction,
-    Coordinate,
-    RoverCoordinate,
-    MovingCoordinate,
-} from "./models.types";
+import { Direction, RoverAction, Coordinate, RoverCoordinate } from "./models.types";
 
 export function isCoordinate(input: any): input is Coordinate {
     return typeof input.x === "number" && input.x >= 0 && typeof input.y === "number" && input.y >= 0;
@@ -32,7 +22,6 @@ export function isRoverCoordinate(input: any): input is RoverCoordinate {
         isDirection(input.direction)
     );
 }
-
 
 export function isInBounds(min: number, max: number, current: number, movement: 1 | -1) {
     switch (movement) {

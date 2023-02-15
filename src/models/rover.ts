@@ -1,14 +1,4 @@
-import {
-    DIRECTIONS,
-    Direction,
-    COMPASS_DEGREES,
-    CompassDegree,
-    ROVER_ACTIONS,
-    RoverAction,
-    Coordinate,
-    RoverCoordinate,
-    MovingCoordinate,
-} from "../types/models.types";
+import { CompassDegree, RoverAction, Coordinate, RoverCoordinate, MovingCoordinate } from "../types/models.types";
 import { degreeRoundUp, roverCoordinateToMovingCoordinate, movingCoordinateToRoverCoordinate } from "./coordinateLogic";
 import { parseInstructionInput, parseCoordinateInput, parseMaxCoordinateInput } from "../parser/parser";
 import { isInBounds, isCoordinate } from "../types/validator";
@@ -20,7 +10,6 @@ export function roverAction_LRM(
     roverAction: RoverAction
 ): MovingCoordinate {
     const inputDegree: CompassDegree = movingCoordinate.degree;
-
     switch (roverAction) {
         case "L":
             return {
@@ -28,14 +17,12 @@ export function roverAction_LRM(
                 degree: degreeRoundUp(inputDegree - 90),
             };
         case "R":
-            // let inputDegree: CompassDegree = movingCoordinate.degree
             return {
                 ...movingCoordinate,
                 degree: degreeRoundUp(inputDegree + 90),
             };
         case "M":
             // NOTE: only move if in bound
-            // TODO2: create seperate function?
             switch (inputDegree) {
                 case 0:
                     if (isInBounds(minCoordinate.y, maxCoordinate.y, movingCoordinate.y, 1)) {
@@ -82,25 +69,21 @@ export function handleRoverInput(
     input_currentCoordinate: string,
     input_instructions: string
 ): string | undefined {
-    // TOCHECK: double check?
     const maxCoordinate: Coordinate | undefined = parseMaxCoordinateInput(input_maxCoordinate);
     if (maxCoordinate === undefined || !isCoordinate(maxCoordinate)) {
         console.log(`invalid input_maxCoordinate!`);
-
         return undefined;
     }
 
     const initCoordinate: RoverCoordinate | undefined = parseCoordinateInput(input_currentCoordinate);
     if (initCoordinate === undefined) {
         console.log(`invalid initCoordinateInput!`);
-
         return undefined;
     }
 
     const inputArray: RoverAction[] | undefined = parseInstructionInput(input_instructions);
     if (inputArray === undefined) {
         console.log(`invalid instructionInput!`);
-
         return undefined;
     }
 
