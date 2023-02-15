@@ -23,7 +23,7 @@ export function systemStart() {
 function showBasicInfo() {
     clear(true);
     print(`Default MIN coorinate: ${minCoordinate.x} ${minCoordinate.y}`);
-    askQuestion(`Press enter MAX coorinate! (e.g.: '5 5')`, enterMaxCoordinate);
+    askQuestion(`Please enter MAX coorinate! (e.g.: '5 5')`, enterMaxCoordinate);
 }
 
 function enterMaxCoordinate(input_maxCoordinate: string) {
@@ -41,7 +41,7 @@ function enterCurrentCoordinate() {
     clear(true);
     print(`MAX coorinate : ${temp_maxCoordinate}`);
     temp_currentCoordinate = "";
-    askQuestion(`Press enter rover current coordinate & orientation! (e.g.: '1 2 N')`, validateCurrentCoordinate);
+    askQuestion(`Please enter rover current coordinate & orientation! (e.g.: '1 2 N')`, validateCurrentCoordinate);
 }
 
 function validateCurrentCoordinate(input_currentCoordinate: string) {
@@ -59,7 +59,7 @@ function enterInstructions() {
     clear(true);
     print(`Rover current coorinate : ${temp_currentCoordinate}`);
     temp_instructions = "";
-    askQuestion(`Press enter rover moving instructions! (e.g.: 'LMLMLMLMM')`, validateInstructions);
+    askQuestion(`Please enter rover moving instructions! (e.g.: 'LMLMLMLMM')`, validateInstructions);
 }
 
 function validateInstructions(input_instructions: string) {
