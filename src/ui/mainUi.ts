@@ -99,8 +99,9 @@ function processRoverInputs() {
         return askQuestion(`Press enter to restart!`, systemStart);
     }
 
+    clear(true);
     print(`Final Coordinate:`);
     print(`${finalCoordinate}`);
     print("--------------------------");
-    return askQuestion(`Press enter to input new rover current coordinate & instructions!`, enterCurrentCoordinate);
+    return askQuestion(`Press enter to start new input`, enterCurrentCoordinate);
 }
