@@ -5,13 +5,20 @@ import {
     CompassDegree,
     ROVER_ACTIONS,
     RoverAction,
+    Coordinate,
     RoverCoordinate,
     MovingCoordinate,
 } from "../types/models.types";
 import { degreeRoundUp, roverCoordinateToMovingCoordinate, movingCoordinateToRoverCoordinate } from "./coordinateLogic";
 import { parseInstructionInput, parseCoordinateInput } from "../parser/parser";
+import { isInBounds } from "../types/validator";
+import { minCoordinate } from "../config/config";
 
-export function roverAction_LRM(movingCoordinate: MovingCoordinate, roverAction: RoverAction): MovingCoordinate {
+export function roverAction_LRM(
+    maxCoordinate: Coordinate,
+    movingCoordinate: MovingCoordinate,
+    roverAction: RoverAction
+): MovingCoordinate {
     const inputDegree: CompassDegree = movingCoordinate.degree;
 
     switch (roverAction) {
@@ -27,40 +34,52 @@ export function roverAction_LRM(movingCoordinate: MovingCoordinate, roverAction:
                 degree: degreeRoundUp(inputDegree + 90),
             };
         case "M":
+            // NOTE: only move if in bound
             // TODO2: allow outbround moving VS stop the rover
             // TODO2: create seperate function
             switch (inputDegree) {
                 case 0:
-                    return {
-                        ...movingCoordinate,
-                        y: movingCoordinate.y + 1,
-                    };
+                    if (isInBounds(minCoordinate.y, maxCoordinate.y, movingCoordinate.y, 1)) {
+                        return {
+                            ...movingCoordinate,
+                            y: movingCoordinate.y + 1,
+                        };
+                    } else {
+                        return movingCoordinate;
+                    }
                 case 90:
-                    return {
-                        ...movingCoordinate,
-                        x: movingCoordinate.x + 1,
-                    };
+                    if (isInBounds(minCoordinate.x, maxCoordinate.x, movingCoordinate.x, 1)) {
+                        return {
+                            ...movingCoordinate,
+                            x: movingCoordinate.x + 1,
+                        };
+                    } else {
+                        return movingCoordinate;
+                    }
                 case 180:
-                    return {
-                        ...movingCoordinate,
-                        y: movingCoordinate.y - 1,
-                    };
+                    if (isInBounds(minCoordinate.y, maxCoordinate.y, movingCoordinate.y, -1)) {
+                        return {
+                            ...movingCoordinate,
+                            y: movingCoordinate.y - 1,
+                        };
+                    } else {
+                        return movingCoordinate;
+                    }
                 case 270:
-                    return {
-                        ...movingCoordinate,
-                        x: movingCoordinate.x - 1,
-                    };
-                // default:
-                //     break;
+                    if (isInBounds(minCoordinate.x, maxCoordinate.x, movingCoordinate.x, -1)) {
+                        return {
+                            ...movingCoordinate,
+                            x: movingCoordinate.x - 1,
+                        };
+                    } else {
+                        return movingCoordinate;
+                    }
             }
-        // default:
-        //     break;
     }
 }
 
-// TOTEST:
-export function handleRoverInput(initCoordinateInput: string, instructionInput: string) {
-    // TODO2: max field size
+export function handleRoverInput(maxCoordinate: Coordinate, initCoordinateInput: string, instructionInput: string) {
+    // TODO2: check input by UI
 
     const initCoordinate: RoverCoordinate | undefined = parseCoordinateInput(initCoordinateInput);
     if (initCoordinate === undefined) {
@@ -78,10 +97,10 @@ export function handleRoverInput(initCoordinateInput: string, instructionInput: 
 
     let movingCoordinate: MovingCoordinate = roverCoordinateToMovingCoordinate(initCoordinate);
     inputArray.forEach((roverAction, index) => {
-        movingCoordinate = roverAction_LRM(movingCoordinate, roverAction);
+        movingCoordinate = roverAction_LRM(maxCoordinate, movingCoordinate, roverAction);
         // console.log(`${index} round-result : ${movingCoordinate.x}, ${movingCoordinate.y},${movingCoordinate.degree},`);
     });
     const finalCoordinate: RoverCoordinate = movingCoordinateToRoverCoordinate(movingCoordinate);
-    console.log(`FINAL-result : ${finalCoordinate.x}, ${finalCoordinate.y}, ${finalCoordinate.direction}`);
+    // console.log(`FINAL-result : ${finalCoordinate.x}, ${finalCoordinate.y}, ${finalCoordinate.direction}`);
     return `${finalCoordinate.x} ${finalCoordinate.y} ${finalCoordinate.direction}`;
 }

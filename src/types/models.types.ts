@@ -8,8 +8,12 @@ export type CompassDegree = typeof COMPASS_DEGREES[number];
 export const ROVER_ACTIONS = ["L", "R", "M"] as const;
 export type RoverAction = typeof ROVER_ACTIONS[number];
 
-// export type RoverInput = ROVER_ACTIONS[]
+export type Coordinate = {
+    x: number;
+    y: number;
+};
 
+// FAIL NOTES: fail to use interfaces extends
 export type RoverCoordinate = {
     x: number;
     y: number;

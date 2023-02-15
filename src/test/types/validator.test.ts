@@ -1,4 +1,4 @@
-import { isRoverAction, isDirection, isRoverCoordinate } from "../../types/validator";
+import { isRoverAction, isDirection, isRoverCoordinate, isInBounds } from "../../types/validator";
 
 describe("test <isRoverAction>", () => {
     test("isRoverAction", () => {
@@ -57,5 +57,20 @@ describe("test <isRoverCoordinate>", () => {
         expect(isRoverCoordinate({ x: 1, y: 1, direction: 0 })).toBe(false);
         expect(isRoverCoordinate({ x: 1, y: 1, direction: 2 })).toBe(false);
         expect(isRoverCoordinate({ x: 1, y: 1, direction: null })).toBe(false);
+    });
+});
+
+describe("test <isInBounds>", () => {
+    test("isInBounds", () => {
+        expect(isInBounds(0, 5, 4, 1)).toBe(true);
+        expect(isInBounds(0, 5, 5, 1)).toBe(false);
+        expect(isInBounds(0, 2, 0, 1)).toBe(true);
+        expect(isInBounds(0, 4, 6, 1)).toBe(false);
+        expect(isInBounds(4, 5, 4, 1)).toBe(true);
+        expect(isInBounds(0, 5, 5, -1)).toBe(true);
+        expect(isInBounds(0, 5, 1, -1)).toBe(true);
+        expect(isInBounds(0, 5, 0, -1)).toBe(false);
+        expect(isInBounds(1, 2, 2, -1)).toBe(true);
+        expect(isInBounds(1, 2, 1, -1)).toBe(false);
     });
 });
