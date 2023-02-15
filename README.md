@@ -26,7 +26,8 @@ $ npm start
 
 The Plateau is divided into a grid. A Rover’s position is represented by x and y co-ordinates and the letters N, S, W, E to represent North, South, West, East (the four cardinal compass points) respectively.
 
-    Example
+Example
+
     0 0 N
 
 This means the Rover is at the bottom-left corner facing in the North direction.
@@ -40,9 +41,9 @@ N.B. Assume that the square directly North from (x, y) is (x, y+1), and the squa
 | L    | Spins the Rover 90 degrees Left without moving from the current coordinate point    |
 | R    | Spins the Rover 90 degrees Right without moving from the current coordinate point   |
 | M    | Moves the Rover forward by one grid point, maintaining the same heading/orientation |
-| ---- | ----------------------------------------------------------------------------------- |
 
 N.B. Assume that the square directly North from (x, y) is (x, y+1).
+
 Rovers move sequentially, this means that the first Rover needs to finish moving first before the next one can move.
 
 ## How To Use
