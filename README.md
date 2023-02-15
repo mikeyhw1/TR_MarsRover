@@ -73,6 +73,8 @@ The Rover’s position is represented by two integers representing the X and Y c
 
 A string of letters representing the instructions to move the Rover around the Plateau.
 
+    LMLMLMLMM
+
 ### Result
 
     Final Coordinate:
